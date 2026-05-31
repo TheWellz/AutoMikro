@@ -17,6 +17,7 @@ collection.upsert(
 )
 
 # Faz a busca
+
 results = collection.query(
     query_texts=["This is a query document about hawaii"],
     n_results=2
