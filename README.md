@@ -1,5 +1,6 @@
 # AutoMikro
 
+<<<<<<< HEAD
 ### Containerlab
 
 * **O que é?** Uma ferramenta leve que "orquestra" laboratórios de redes.
