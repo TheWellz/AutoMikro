@@ -31,7 +31,7 @@ def buscar_com_query(pergunta):
     return resposta
 
 
-p = "Qual é o comando para permitir que o DHCPv6-Client receba delegação de prefixo no IPv6?"
+p = "Como eu configuro o NAT?"
 print(f"\nConsultando o banco sobre: {p}")
     
 resultado = buscar_com_query(p)

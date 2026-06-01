@@ -1,0 +1,10 @@
+Passo 4: Entendendo a Configuração Padrão
+Quando você se conecta pela primeira vez, pode ver um popup sobre a configuração padrão:
+Para iniciantes: Mantenha a configuração padrão - ela fornece segurança e funcionalidade básicas
+O setup padrão inclui: Regras básicas de firewall, servidor DHCP e segurança wireless
+Você pode personalizá-la com segurança seguindo este guia sem remover os padrões
+Remover a configuração padrão elimina todas as regras de segurança. Apenas usuários avançados devem fazer isso.
+Roteador sem Configuração Padrão (apenas usuários avançados)
+Se o roteador não tiver uma configuração padrão, há várias opções a serem consideradas. No entanto, neste caso, optaremos por um método que melhor se adapte aos nossos requisitos. Conecte o cabo do ISP à porta ether1 do roteador e conecte seu PC a qualquer porta, exceto a ether1.
+O método mais fácil para garantir um roteador completamente limpo é executar o comando CLI:
+/system reset-configuration no-defaults=yes skip-backup=yes

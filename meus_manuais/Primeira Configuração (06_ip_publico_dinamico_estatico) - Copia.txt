@@ -1,0 +1,16 @@
+Dynamic Public IP
+A configuração de endereço dinâmico é a opção mais fácil. Simplesmente configure um cliente DHCP na interface pública. O cliente DHCP obterá informações do seu ISP, como um endereço IP, servidores DNS, servidores NTP e rota padrão.
+/ip dhcp-client add disabled=no interface=ether1
+Após adicionar o cliente, você deve ver o endereço atribuído e o status deve ser bound:
+[admin@MikroTik] > ip dhcp-client print
+Static Public IP
+Ao configurar um endereço estático, seu ISP fornece parâmetros específicos, como:
+IP: 1.2.3.100/24
+Gateway: 1.2.3.1
+DNS: 8.8.8.8
+Para configurar isso no RouterOS, adicionaremos manualmente um endereço IP, uma rota padrão e configuraremos um servidor DNS:
+Bash
+
+/ip address add address=1.2.3.100/24 interface=ether1
+/ip route add gateway=1.2.3.1
+/ip dns set servers=8.8.8.8

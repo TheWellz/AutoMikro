@@ -1,0 +1,13 @@
+Configurando o Acesso IP
+Como a conexão pode às vezes ser não confiável, nosso primeiro passo é configurar o roteador para habilitar a conectividade IP:
+Criar uma interface bridge e atribuir portas bridge;
+Atribuir um endereço IP à interface bridge;
+Configurar um servidor DHCP.
+Configurar a bridge e atribuir um endereço IP são processos diretos:
+Bash
+
+/interface bridge add name=bridge1
+/interface bridge port add interface=ether2 bridge=bridge1
+/ip address add address=192.168.88.1/24 interface=bridge1
+Em seguida, prossiga com a configuração de um servidor DHCP. Para simplificar e agilizar este processo, executaremos o comando de setup.
+[admin@MikroTik] > ip dhcp-server/ setup [enter]

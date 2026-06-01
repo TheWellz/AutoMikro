@@ -1,0 +1,13 @@
+Selecione a interface para executar o servidor DHCP:
+dhcp server interface: bridge1 [enter]
+Selecione a rede para endereços DHCP:
+dhcp address space: 192.168.88.0/24 [enter]
+Selecione o gateway para a rede fornecida:
+gateway for dhcp network: 192.168.88.1 [enter]
+Selecione o pool de endereços IP distribuídos pelo servidor DHCP:
+addresses to give out: 192.168.88.2-192.168.88.254 [enter]
+Selecione os servidores DNS:
+dns servers: 192.168.88.1 [enter]
+Selecione o tempo de concessão (lease time):
+lease time: 1800 [enter]
+Observe que a maioria das opções de configuração é determinada automaticamente e você simplesmente precisa pressionar a tecla enter. Seguindo estes passos, o PC conectado deve agora obter um endereço IP dinâmico. Você pode então se reconectar ao roteador usando o endereço IP (192.168.88.1).

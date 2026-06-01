@@ -1,0 +1,14 @@
+Conexão PPPoE
+A conexão PPPoE também fornece um endereço IP dinâmico e pode configurar dinamicamente o DNS e o gateway padrão. Normalmente, o ISP fornece um nome de usuário e senha:
+Bash
+
+/interface pppoe-client
+  add disabled=no interface=ether1 user=me password=123 \
+    add-default-route=yes use-peer-dns=yes
+Mais adiante na configuração, a interface WAN passa a ser a interface pppoe-out1, não a ether1.
+Verificar Conectividade
+Para verificar a conectividade IP, tente dar um ping em um endereço IP conhecido do Google.
+[admin@MikroTik] > /ping 8.8.8.8
+Verifique a requisição DNS:
+[admin@MikroTik] > /ping google.com
+Se todas as configurações estiverem corretas, ambos os pings devem ser bem-sucedidos. Se houver falha, consulte a seção de Solução de Problemas.

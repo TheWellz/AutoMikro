@@ -1,0 +1,11 @@
+Acesso de Conectividade MAC
+Para restringir a conectividade MAC apenas à rede local:
+Bash
+
+/interface list add name=LAN
+/interface list member add list=LAN interface=bridge1
+/tool mac-server set allowed-interface-list=LAN
+/tool mac-server mac-winbox set allowed-interface-list=LAN
+Neighbor Discovery
+Desative a descoberta de vizinhos em interfaces públicas:
+/ip neighbor discovery-settings set discover-interface-list=LAN

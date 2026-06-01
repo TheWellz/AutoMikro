@@ -10,14 +10,6 @@ Settings.embed_model = HuggingFaceEmbedding(
     model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 )
 
-# Força o fatiamento em cada linha (\n\n)
-Settings.node_parser = SentenceSplitter(
-    separator="\n",          
-    chunk_size=1024,         
-    chunk_overlap=0,         
-    paragraph_separator="\n\n" 
-)
-
 def atualizar_banco():
     print("Iniciando Ingestão de documentos...")
     

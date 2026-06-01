@@ -1,0 +1,11 @@
+Serviços Administrativos
+Desative serviços desnecessários e altere portas padrão para evitar ataques de força bruta:
+Bash
+
+/ip service disable telnet,ftp,www,api
+/ip service set ssh port=2200
+Outros Serviços
+Desativar bandwidth-server: /tool bandwidth-server set enabled=no
+Configurar DNS cache: /ip dns set allow-remote-requests=no
+Habilitar criptografia forte no SSH: /ip ssh set strong-crypto=yes
+Garantir serviços extras desativados: proxy, socks, upnp e cloud/DDNS se não utilizados.
