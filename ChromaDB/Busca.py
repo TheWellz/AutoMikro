@@ -2,15 +2,14 @@ import chromadb
 from llama_index.core import VectorStoreIndex, Settings
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from llama_index.llms.ollama import Ollama # Para o cérebro local
+from llama_index.llms.ollama import Ollama
 
-# 1. Configuração do "Tradutor" (Embedding)
+# Configuração do "Tradutor" (Embedding)
 Settings.embed_model = HuggingFaceEmbedding(
     model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 )
 
-# 2. Configuração do "Cérebro" (LLM Local - Llama 3 via Ollama)
-# Se você não quiser que a IA "invente", apenas que responda com o que achou
+# Configuração do "Cérebro" (LLM Local - Llama 3 via Ollama)
 #Settings.llm = Ollama(model="qwen2.5:1.5b", request_timeout=300.0)
 Settings.llm = None
 

@@ -10,7 +10,7 @@ Settings.embed_model = HuggingFaceEmbedding(
     model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 )
 
-# Força o fatiamento em cada quebra de linha (\n)
+# Força o fatiamento em cada linha (\n\n)
 Settings.node_parser = SentenceSplitter(
     separator="\n",          
     chunk_size=1024,         
@@ -33,7 +33,6 @@ def atualizar_banco():
     documentos = SimpleDirectoryReader("./meus_manuais").load_data()
     
     # Cria o índice e SALVA no banco
-    # Nota: Se o banco já tiver dados, isso ADICIONARÁ os novos
     VectorStoreIndex.from_documents(
         documentos, 
         storage_context=storage_context,
