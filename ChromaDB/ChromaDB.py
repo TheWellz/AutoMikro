@@ -1,70 +1,76 @@
 import chromadb
-from chromadb.utils import embedding_functions
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext
+from llama_index.vector_stores.chroma import ChromaVectorStore
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.core import Settings
 
-# --- CONFIGURAÇÃO DO MODELO DE IA ---
-# Define o modelo que entende português para transformar texto em números (vetores)
-modelo_portugues = embedding_functions.SentenceTransformerEmbeddingFunction(
-    model_name="paraphrase-multilingual-MiniLM-L12-v2"
+# --- 1. CONFIGURAÇÃO DO MODELO DE IA (O MAESTRO) ---
+# Aqui definimos globalmente que o LlamaIndex usará o MiniLM-L12 para tudo
+Settings.embed_model = HuggingFaceEmbedding(
+    model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 )
 
-# --- INICIALIZAÇÃO DO CLIENTE ---
-# Configura o banco para salvar os dados permanentemente na pasta local especificada
+# --- 2. INICIALIZAÇÃO DO CLIENTE E COLEÇÃO ---
 print("Iniciando o ChromaDB Persistente...")
 chroma_client = chromadb.PersistentClient(path="./meu_banco_local")
 
-# --- GERENCIAMENTO DE COLEÇÃO ---
-# Cria a pasta 'documentos' ou a carrega se já existir, incluindo os metadados descritivos
-collection = chroma_client.get_or_create_collection(
-    name="documentos",
-    embedding_function=modelo_portugues,
-    metadata={"description": "Banco de dados sobre receitas, mecânica e saúde", "prioridade": "alta"}
+# Criamos/Carregamos a coleção específica para o MikroTik
+chroma_collection = chroma_client.get_or_create_collection(name="documentos_mikrotik")
+
+# --- 3. PREPARAÇÃO DA PONTE (STORAGE CONTEXT) ---
+# Conectamos o LlamaIndex ao armazenamento do ChromaDB
+vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
+storage_context = StorageContext.from_defaults(vector_store=vector_store)
+
+# --- 4. INGESTÃO AUTOMÁTICA DE ARQUIVOS ---
+print("Lendo manuais da pasta './meus_manuais'...")
+# O SimpleDirectoryReader lê PDFs, TXTs, etc., de uma vez só
+documentos = SimpleDirectoryReader("./meus_manuais").load_data()
+
+# --- 5. CRIAÇÃO DO ÍNDICE (TRANSFORMAÇÃO EM VETORES) ---
+# O LlamaIndex pega os documentos, quebra em pedaços e salva no ChromaDB
+index = VectorStoreIndex.from_documents(
+    documentos, 
+    storage_context=storage_context
 )
 
-# --- INGESTÃO DE DADOS ---
-# Adiciona os textos ao banco. O 'upsert' evita duplicatas se o ID já existir
-collection.upsert(
-    ids=["doc_rota", "doc_subrede", "doc_firewall"],
-    documents=[
-        "Para configurar uma rota estática, você deve definir o IP de destino, a máscara de sub-rede e o endereço do próximo salto (gateway) para que o roteador saiba para onde enviar o tráfego.",
-        "A criação de sub-redes (subnetting) envolve a divisão de uma rede IP principal em segmentos menores, utilizando a máscara de rede para otimizar o tráfego e melhorar a organização dos endereços.",
-        "A configuração do Firewall no roteador é essencial para a segurança, permitindo criar regras que filtram pacotes de entrada e saída para impedir acessos não autorizados e ataques externos."
-    ],
-    metadatas=[
-        {"setor": "infra", "dificuldade": "media", "tipo": "roteamento"},
-        {"setor": "infra", "dificuldade": "alta", "tipo": "endereçamento"},
-        {"setor": "seguranca", "dificuldade": "media", "tipo": "protecao"}
-    ]
-)
+# --- 6. GERENCIAMENTO E DIAGNÓSTICO ---
+print(f"\nSucesso! {len(documentos)} arquivos foram indexados.")
+print(f"Total de registros (pedaços de texto) no banco: {chroma_collection.count()}")
+
+query_engine = index.as_query_engine()
+
+pergunta = "O que é Connection Tracking e para que serve?"
+print(f"\nConsultando: {pergunta}")
+
+# A resposta buscará nos 554 pedaços e trará a melhor combinação
+resposta = query_engine.query(pergunta)
+
+print("\n--- RESPOSTA DA IA ---")
+print(resposta)
+
+
+
+
+# Exemplo: Se precisar apagar a coleção para começar do zero
+# chroma_client.delete_collection(name="documentos_mikrotik")
 
 # --- PROCESSO DE BUSCA ---
 # Define a pergunta em linguagem natural e executa a busca semântica
-pergunta = "Como posso impedir que invasores acessem minha rede interna?"
-print(f"\nBuscando por: '{pergunta}'")
+#pergunta = "Como posso impedir que invasores acessem minha rede interna?"
+#print(f"\nBuscando por: '{pergunta}'")
 
-resultados = collection.query(
-    query_texts=[pergunta],
-    n_results=1,
+#resultados = collection.query(
+ #   query_texts=[pergunta],
+ #   n_results=1,
     #where={"setor": "infra"}
-)
+#)
 
 # --- EXIBIÇÃO DE RESULTADOS ---
 # Mostra o documento mais relevante encontrado pela IA
-print("\n--- Resultado mais próximo ---")
-print(f"Texto: {resultados['documents'][0][0]}") 
-print(f"ID: {resultados['ids'][0][0]}")
-
-# --- GERENCIAMENTO E LISTAGEM ---
-# Lista todas as coleções presentes no banco de dados atual
-todas_colecoes = chroma_client.list_collections()
-print(f"Eu tenho {len(todas_colecoes)} coleções cadastradas.")
-for col in todas_colecoes:
-    print(f"Nome: {col.name}")
-
-# --- INSPEÇÃO E DIAGNÓSTICO ---
-# Mostra a quantidade de itens e uma amostra dos dados armazenados
-print(f"Total de registros na coleção: {collection.count()}")
-print("Dando uma espiadinha nos primeiros dados:")
-print(collection.peek()) 
+#print("\n--- Resultado mais próximo ---")
+#print(f"Texto: {resultados['documents'][0][0]}") 
+#print(f"ID: {resultados['ids'][0][0]}")
 
 # Verifica se o banco de dados está ativo e respondendo
-print(f"\nStatus do Banco (Heartbeat): {chroma_client.heartbeat()}")
+#print(f"\nStatus do Banco (Heartbeat): {chroma_client.heartbeat()}")
