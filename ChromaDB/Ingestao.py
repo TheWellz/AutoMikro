@@ -15,8 +15,17 @@ def atualizar_banco():
     
     # Conecta ao Chroma
     db = chromadb.PersistentClient(path="./meu_banco_local")
-    chroma_collection = db.get_or_create_collection("documentos_mikrotik")
     
+    # Deleta a coleção antiga se ela existir para evitar duplicados
+    try:
+        db.delete_collection("documentos_mikrotik")
+        print("Coleção antiga removida para atualização limpa.")
+    except Exception:
+        # Se a coleção não existia ainda, ele ignora o erro e segue em frente
+        pass
+    
+    chroma_collection = db.get_or_create_collection("documentos_mikrotik")
+
     # Configura o armazenamento
     vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
     storage_context = StorageContext.from_defaults(vector_store=vector_store)

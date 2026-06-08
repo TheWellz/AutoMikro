@@ -30,8 +30,7 @@ def buscar_com_query(pergunta):
     resposta = query_engine.query(pergunta)
     return resposta
 
-
-p = "Como eu configuro o NAT?"
+p = input("Qual sua duvida? ")
 print(f"\nConsultando o banco sobre: {p}")
     
 resultado = buscar_com_query(p)
