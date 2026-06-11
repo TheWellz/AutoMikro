@@ -42,5 +42,4 @@ def atualizar_banco():
     
     print(f"Sucesso! O banco agora tem {chroma_collection.count()} fatias.")
 
-if __name__ == "__main__":
-    atualizar_banco()
+atualizar_banco()

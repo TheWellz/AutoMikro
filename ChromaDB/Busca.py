@@ -9,8 +9,6 @@ Settings.embed_model = HuggingFaceEmbedding(
     model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 )
 
-# Configuração do "Cérebro" (LLM Local - Llama 3 via Ollama)
-#Settings.llm = Ollama(model="qwen2.5:1.5b", request_timeout=300.0)
 Settings.llm = None
 
 def buscar_com_query(pergunta):
@@ -30,10 +28,10 @@ def buscar_com_query(pergunta):
     resposta = query_engine.query(pergunta)
     return resposta
 
-p = input("Qual sua duvida? ")
-print(f"\nConsultando o banco sobre: {p}")
+pergunta = input("Qual sua duvida? ")
+print(f"\nConsultando o banco sobre: {pergunta}")
     
-resultado = buscar_com_query(p)
+resultado = buscar_com_query(pergunta)
     
 print("\n--- RESPOSTA FINAL ---")
 print(resultado)
