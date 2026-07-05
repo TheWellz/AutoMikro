@@ -8,7 +8,7 @@ O AutoMikro é um assistente técnico de IA baseado em LLM e RAG estruturado par
 
 | Ferramenta | Função no Projeto |
 | :--- | :--- |
-| **Python 3.10+** |  Linguagem base utilizada para estruturar a lógica do sistema |
+| **Python 3.13** |  Linguagem base utilizada para estruturar a lógica do sistema |
 | **Docker Desktop** | Plataforma de containerização que roda o ecossistema Ollama isolado no Windows. |
 | **Ollama** | Motor local responsável pela execução e gerenciamento de LLMs. |
 | **Qwen3:4b-instruct** | Modelo de IA especializado em seguir instruções e gerar os comandos técnicos. |
@@ -43,8 +43,6 @@ AutoMikro/
 ```
 ## Passo a Passo para Execução
 
-Siga a ordem dos blocos abaixo no seu terminal para preparar o ambiente e rodar o projeto:
-
 ### 1. Subir o Servidor Ollama no Docker
 Certifique-se de que o Docker Desktop está aberto e execute o comando abaixo na pasta do arquivo `compose.yaml`:
 ```bash
@@ -62,7 +60,7 @@ Execute o script do PowerShell para automatizar a instalação de todas as bibli
 ```bash
 ./instalar_dependencias.ps1
 ```
-### 4. Instalar as Dependências do Python
+### 4. Inicializar o Sistema
 Após concluir as etapas anteriores, inicialize a aplicação e abra o menu principal do AutoMikro:
 ```bash
 python main.py
