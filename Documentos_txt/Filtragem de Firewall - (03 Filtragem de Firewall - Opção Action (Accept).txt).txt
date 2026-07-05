@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD ACTION=ACCEPT - No comando de filtro IPv4 do MikroTik, a opção `action=accept` determina que o tráfego correspondente será aceito, liberado e permitido a passar pelo firewall, interrompendo o processamento desta cadeia. Use esta ação para liberar o tráfego de protocolos (como ICMP para ping, TCP ou UDP), portas específicas ou chains de input e forward.

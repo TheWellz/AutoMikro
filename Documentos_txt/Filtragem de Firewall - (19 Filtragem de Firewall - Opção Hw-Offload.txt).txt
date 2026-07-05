@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD ACTION=FASTTRACK-CONNECTION HW-OFFLOAD=YES - No comando de filtro IPv4 do MikroTik, quando usado junto com o FastTrack, a opção `hw-offload=yes` ativa o descarregamento de hardware (Hardware Offloading). Isso faz com que o tráfego acelerado seja processado diretamente no chip de switch do hardware, economizando CPU principal do roteador.

@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD ICMP-OPTIONS=8:0 - No comando de filtro IPv4 do MikroTik, a opção `icmp-options=8:0` filtra tipos e códigos específicos do protocolo ICMP; o exemplo `8:0` faz a correspondência exata com requisições de ping (Echo Request). Use este filtro para isolar apenas o pedido de ping e aplicar regras de liberação (action=accept) ou bloqueio (action=drop).

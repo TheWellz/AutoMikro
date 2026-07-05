@@ -1,0 +1,1 @@
+-IP FIREWALL ADDRESS-LIST ADD COMMENT=RFC6890 - No comando do MikroTik de listas de endereços (Address-List), a opção `comment` anexa uma descrição, nota ou comentário em formato de texto à entrada da lista. Essencial para documentação, identificação do administrador e organização visual das regras e tabelas de IPs do firewall.

@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD SRC-ADDRESS-LIST=ALLOWED_TO_ROUTER - No comando de filtro IPv4 do MikroTik, a opção `src-address-list` confronta o endereço IP de origem do pacote com uma lista de IPs pré-criada (Address-List). Permite aplicar regras de liberação (accept) ou bloqueio (drop) em lote baseado em grupos de usuários ou redes de origem autorizadas.

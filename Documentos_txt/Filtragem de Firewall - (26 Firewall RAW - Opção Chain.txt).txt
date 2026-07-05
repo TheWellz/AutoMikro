@@ -1,0 +1,1 @@
+-IP FIREWALL RAW ADD CHAIN=PREROUTING - No comando da tabela RAW do MikroTik, a opção `chain=prerouting` captura e processa pacotes de rede assim que eles dão entrada em qualquer interface, ocorrendo antes do mecanismo de Connection Tracking. Ideal para aplicar filtros de alta performance e proteção contra ataques DDoS de forma antecipada.

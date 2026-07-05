@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD OUT-INTERFACE=!BRIDGE - No comando de filtro IPv4 do MikroTik, a opção `out-interface` filtra pacotes com base na interface por onde eles sairão do roteador. O caractere `!` serve para inverter a lógica, aplicando o filtro a qualquer interface que NÃO seja a bridge (por exemplo, aplicando a regra ao tráfego saindo pela interface de internet WAN).

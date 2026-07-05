@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD ACTION=FASTTRACK-CONNECTION - No comando de filtro IPv4 do MikroTik, a ação `action=fasttrack-connection` ativa o bypass de pacotes pelo FastPath, acelerando drasticamente o tráfego de conexões IPv4 já estabelecidas (established). Reduz o uso de CPU do roteador ao pular etapas do firewall para tráfegos confiáveis na chain forward.

@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD LOG=YES LOG-PREFIX=INVALID - No comando de filtro IPv4 do MikroTik, a opção `log=yes` ativa o registro do pacote no syslog do sistema (Log), enquanto `log-prefix` insere um prefixo em texto personalizado. Útil para monitorar tráfego suspeito, pacotes de conexões inválidas ou tentativas de ping antes de aplicar um drop.

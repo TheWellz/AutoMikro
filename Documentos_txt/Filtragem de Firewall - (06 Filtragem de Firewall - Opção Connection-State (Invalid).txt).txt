@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD CONNECTION-STATE=INVALID - No comando de filtro IPv4 do MikroTik, a opção `connection-state=invalid` identifica pacotes corrompidos que não pertencem a nenhuma conexão conhecida no Connection Tracking. Altamente recomendado combinar esta opção com a ação `action=drop` para bloquear e descartar pacotes inválidos, aumentando a segurança do roteador.

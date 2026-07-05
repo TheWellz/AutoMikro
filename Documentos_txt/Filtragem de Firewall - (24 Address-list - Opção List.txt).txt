@@ -1,0 +1,1 @@
+-IP FIREWALL ADDRESS-LIST ADD LIST=ALLOWED_TO_ROUTER - No comando do MikroTik de listas de endereços (Address-List), a opção `list` define o nome em texto do grupo ou tabela que organizará os IPs informados. Esse nome de lista serve de ponte para ser referenciado nas regras de firewall filter usando src-address-list ou dst-address-list.

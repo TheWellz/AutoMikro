@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD IN-INTERFACE=BRIDGE - No comando de filtro IPv4 do MikroTik, a opção `in-interface=bridge` restringe a aplicação da regra apenas aos pacotes que entrarem no roteador através de uma interface física ou lógica específica (como a rede local bridge). Ajuda a validar a origem física do tráfego antes de aceitar (accept) ou bloquear (drop).

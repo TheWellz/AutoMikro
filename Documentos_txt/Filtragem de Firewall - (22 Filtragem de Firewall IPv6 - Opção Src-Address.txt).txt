@@ -1,0 +1,1 @@
+-IPV6 FIREWALL FILTER ADD SRC-ADDRESS=FE80::-10 - No comando de filtro IPv6 do MikroTik, a opção `src-address` filtra pacotes baseando-se no IP ou prefixo de origem IPv6. O exemplo filtra o escopo de endereços link-local (`fe80::`), permitindo criar regras específicas de permissão ou bloqueio para a rede local física direta.

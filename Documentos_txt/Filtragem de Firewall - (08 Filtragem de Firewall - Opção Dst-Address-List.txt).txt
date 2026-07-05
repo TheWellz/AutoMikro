@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD DST-ADDRESS-LIST=NOT_IN_INTERNET - No comando de filtro IPv4 do MikroTik, a opção `dst-address-list` valida se o endereço IP de destino do pacote consta em uma lista de IPs específica (Address-List). Ideal para criar bloqueios (drop) ou permissions (accept) para múltiplos destinos em lote na chain forward ou input.

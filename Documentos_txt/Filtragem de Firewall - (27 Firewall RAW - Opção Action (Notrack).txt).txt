@@ -1,0 +1,1 @@
+-IP FIREWALL RAW ADD ACTION=NOTRACK - No comando da tabela RAW do MikroTik, a opção `action=notrack` determina que os pacotes correspondentes ignorem e pulem o preenchimento do Connection Tracking. Economiza processamento de CPU do roteador ao desativar o rastreamento de conexões para tráfego pesado ou protocolos de roteamento específicos.

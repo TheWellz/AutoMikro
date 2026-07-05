@@ -1,0 +1,1 @@
+-IPV6 FIREWALL FILTER ADD PROTOCOL=UDP DST-PORT=546 - No comando de filtro IPv6 do MikroTik, a opção `dst-port=546` especifica a porta de destino usada com o protocolo UDP. O exemplo filtra o tráfego da porta 546 correspondente à comunicação do cliente DHCPv6, permitindo criar filtros de accept ou drop para atribuição de ips IPv6.

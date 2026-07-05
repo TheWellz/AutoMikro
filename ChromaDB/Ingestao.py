@@ -3,43 +3,46 @@ from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageCon
 from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import Settings
-from llama_index.core.node_parser import SentenceSplitter
 
-# Configuração do Modelo
+# Define o modelo de IA multi-linguagem para fazer os embeddings dos documentos.
 Settings.embed_model = HuggingFaceEmbedding(
-    model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    model_name="BAAI/bge-m3"
 )
 
 def atualizar_banco():
     print("Iniciando Ingestão de documentos...")
     
-    # Conecta ao Chroma
-    db = chromadb.PersistentClient(path="./meu_banco_local")
+    db = chromadb.PersistentClient(path="./Banco_vetorial")  # Inicializa uma conexão local com o banco vetorial.
     
-    # Deleta a coleção antiga se ela existir para evitar duplicados
     try:
         db.delete_collection("documentos_mikrotik")
         print("Coleção antiga removida para atualização limpa.")
     except Exception:
-        # Se a coleção não existia ainda, ele ignora o erro e segue em frente
         pass
     
-    chroma_collection = db.get_or_create_collection("documentos_mikrotik")
+    mikrotik_collection = db.get_or_create_collection("documentos_mikrotik") # Cria ou obtém a coleção de documentos mikrotik.
+    vector_store = ChromaVectorStore(chroma_collection=mikrotik_collection) # Conecta a coleção do MikroTik ao framework LhamaIndex.
+    storage_context = StorageContext.from_defaults(vector_store=vector_store) # Define onde os índices e vetores serão salvos fisicamente no ChromaDB.
 
-    # Configura o armazenamento
-    vector_store = ChromaVectorStore(chroma_collection=chroma_collection)
-    storage_context = StorageContext.from_defaults(vector_store=vector_store)
+    documentos = []
+
+    print("Processando manuais...")
+    try:
+        # Transforma os documentos em vetores e os armazena no banco vetorial.
+        docs_explicacao = SimpleDirectoryReader("./Documentos_txt").load_data()
+        documentos.extend(docs_explicacao)
+    except Exception as e:
+        print(f"Aviso ao ler documentos_txt: {e}")
+        
+    if not documentos:
+        print("❌ Nenhum documento encontrado nas pastas para indexação!")
+        return
     
-    # Lê os arquivos (PDF, TXT, DOCX)
-    documentos = SimpleDirectoryReader("./meus_manuais").load_data()
-    
-    # Cria o índice e SALVA no banco
+    # Converte os documentos em vetores e os salva no banco.
     VectorStoreIndex.from_documents(
         documentos, 
         storage_context=storage_context,
         show_progress=True
     )
     
-    print(f"Sucesso! O banco agora tem {chroma_collection.count()} fatias.")
-
-atualizar_banco()
+    print(f"Sucesso! O banco agora tem {mikrotik_collection.count()} fatias catalogadas.")

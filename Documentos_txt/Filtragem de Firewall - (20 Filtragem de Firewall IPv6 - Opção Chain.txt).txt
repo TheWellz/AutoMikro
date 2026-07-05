@@ -1,0 +1,1 @@
+-IPV6 FIREWALL FILTER ADD CHAIN=INPUT - No comando de filtro IPv6 do MikroTik, a opção `chain=input` limita a análise das regras de firewall exclusivamente a pacotes da nova geração IPv6 cujo endereço de destino final seja o próprio roteador (como acessos administrativos ou tráfego ICMPv6 direcionado ao equipamento).

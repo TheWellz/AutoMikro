@@ -1,0 +1,1 @@
+-IP FIREWALL ADDRESS-LIST ADD ADDRESS=192.168.88.2-192.168.88.254 - No comando do MikroTik de listas de endereços (Address-List), a opção `address` define o IP único, a sub-rede em formato CIDR ou o intervalo de IPs que será armazenado. Essa tabela serve como banco de dados para ser chamada por regras de filtro (accept/drop) através de src-address-list ou dst-address-list.

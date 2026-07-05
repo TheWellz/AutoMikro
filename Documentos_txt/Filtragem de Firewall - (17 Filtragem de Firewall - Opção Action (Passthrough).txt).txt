@@ -1,0 +1,1 @@
+-IP FIREWALL FILTER ADD ACTION=PASSTHROUGH - No comando de filtro IPv4 do MikroTik, a opção `action=passthrough` contabiliza os pacotes e bytes nos medidores da regra e o envia imediatamente para a próxima linha do firewall. Útil para auditoria, coletar estatísticas de tráfego de rede ou checar o volume de dados de protocolos (como ICMP, TCP, UDP) sem alterar ou bloquear o fluxo.
